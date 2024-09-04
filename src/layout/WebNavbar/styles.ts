@@ -7,7 +7,7 @@ export const NavWrapper = styled(Box)(({ theme }) => ({
   background: theme.palette.background.dark,
 
   // background: theme.palette.background.default,
-  color: theme.palette.text.primary,
+  color: theme.palette.text.light,
   height: "100%",
   display: "flex",
   justifyContent: "space-between",

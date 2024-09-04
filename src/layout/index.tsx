@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutWrapper, PageWrapper } from "./styles";
 import MobileNavbar from "./MobileNavbar";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import WebNavbar from "./WebNavbar";
 import Footer from "./Footer";
 

@@ -147,6 +147,7 @@ export const lightTheme = createTheme(theme, {
       primary: "#1E1E1E",
       secondary: "#525252",
       disabled: "#BFBFBF",
+      light: "#ffffff",
     },
     background: {
       paper: "#F3F7EC",
