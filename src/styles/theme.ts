@@ -1,8 +1,15 @@
 import { createTheme } from "@mui/material/styles";
 import { LightOverrides } from "./override";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 // Create a theme instance.
 let theme = createTheme({
+  navHeight: {
+    maxHeight: 64,
+  },
   shape: {
     borderRadius: 10,
   },
@@ -37,13 +44,13 @@ let theme = createTheme({
     htmlFontSize: 16,
     fontSize: 16,
     fontFamily: [
-      "Open Sans",
+      "Roboto",
       "sans-serif",
+      "Open Sans",
       "Arial",
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',
-      "Roboto",
       '"Helvetica Neue"',
       "sans-serif",
       '"Apple Color Emoji"',
@@ -51,21 +58,25 @@ let theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(","),
     h1: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "3.375rem", // 54px
       fontWeight: 600,
       lineHeight: "72px",
     },
     h2: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "1.875rem", // 30px
       fontWeight: 600,
       lineHeight: "42px",
     },
     h3: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "1.5rem", // 24px
       fontWeight: "bold",
       lineHeight: "32px",
     },
     h4: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "1.25rem", // 20px
       fontWeight: "bold",
       lineHeight: "28px",
@@ -75,6 +86,7 @@ let theme = createTheme({
       },
     },
     body1: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "1rem", // 16px
       lineHeight: "24px",
       "@media (max-width:600px)": {
@@ -83,6 +95,7 @@ let theme = createTheme({
       },
     },
     body2: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "1rem", // 16px
       fontWeight: "bold",
       lineHeight: "24px",
@@ -92,6 +105,7 @@ let theme = createTheme({
       },
     },
     subtitle1: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "0.875rem", // 14px
       "@media (max-width:600px)": {
         fontSize: "0.75rem", // 12px
@@ -99,6 +113,7 @@ let theme = createTheme({
       },
     },
     subtitle2: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "0.875rem", // 14px
       fontWeight: "bold",
       "@media (max-width:600px)": {
@@ -107,6 +122,7 @@ let theme = createTheme({
       },
     },
     caption: {
+      fontFamily: "Roboto,sans-serif",
       fontSize: "0.75rem", // 12px
       fontWeight: 600,
       lineHeight: "19.5px",

@@ -13,7 +13,7 @@ export const LayoutWrapper = styled("main")(({ theme }) => ({
 }));
 
 export const PageWrapper = styled(Box)(({ theme }) => ({
-  padding: "1rem",
+  paddingTop: theme.navHeight.maxHeight + 20,
   margin: 0,
   background: theme.palette.background.paper,
   color: theme.palette.text.primary,

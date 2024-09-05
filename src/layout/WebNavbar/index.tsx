@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { NavWrapper } from "./styles";
-import { Link } from "@tanstack/react-router";
-import { Box, Typography, Menu, MenuItem, IconButton } from "@mui/material";
+import { Link, useNavigate } from "@tanstack/react-router";
+import {
+  Box,
+  Typography,
+  Menu,
+  MenuItem,
+  IconButton,
+  Divider,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import Sidebar from "../Sidebar";
 
 const WebNavbar: React.FC = () => {
+  const navigate = useNavigate();
+  const theme = useTheme();
+  // Media query that matches when the screen width is below 'sm' (600px)
+  const isBelowSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [languageAnchorEl, setLanguageAnchorEl] = useState<null | HTMLElement>(
     null
   );
@@ -14,6 +29,7 @@ const WebNavbar: React.FC = () => {
   );
 
   const handleLanguageClick = (event: React.MouseEvent<HTMLElement>) => {
+    console.log("event.currentTar", event.currentTarget);
     setLanguageAnchorEl(event.currentTarget);
   };
 
@@ -33,10 +49,16 @@ const WebNavbar: React.FC = () => {
     console.log(`Language changed to: ${language}`);
     handleCloseLanguageMenu();
   };
-
+  const accountItems = [
+    { title: "Cancel Ticket", route: "/cancellation" },
+    { title: "Change Travel Date", route: "/reshedule" },
+    { title: "Show My Ticket", route: "/displayTicket" },
+    { title: "Email/SMS", route: "/smsEmailTicket" },
+  ];
   return (
     <NavWrapper>
       <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
+        {isBelowSm && <Sidebar />}
         <Link to="/">
           <img
             src="/images/bus.png"
@@ -48,9 +70,11 @@ const WebNavbar: React.FC = () => {
         <Typography variant="h6">My-Booking-App</Typography>
       </Box>
       <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-        <IconButton onClick={handleLanguageClick}>
-          <LanguageIcon />
-        </IconButton>
+        {!isBelowSm && (
+          <IconButton onClick={handleLanguageClick}>
+            <LanguageIcon />
+          </IconButton>
+        )}
         <Menu
           anchorEl={languageAnchorEl}
           open={Boolean(languageAnchorEl)}
@@ -60,16 +84,33 @@ const WebNavbar: React.FC = () => {
           <MenuItem onClick={() => changeLanguage("Hindi")}>Hindi</MenuItem>
         </Menu>
 
-        <IconButton onClick={handleAccountClick}>
-          <AccountCircle />
-        </IconButton>
+        {!isBelowSm && (
+          <IconButton onClick={handleAccountClick}>
+            <AccountCircle />
+          </IconButton>
+        )}
         <Menu
           anchorEl={accountAnchorEl}
           open={Boolean(accountAnchorEl)}
           onClose={handleCloseAccountMenu}
         >
-          <MenuItem onClick={handleCloseAccountMenu}>Profile</MenuItem>
-          <MenuItem onClick={handleCloseAccountMenu}>Logout</MenuItem>
+          {accountItems?.map((item) => {
+            return (
+              <MenuItem
+                key={item.route}
+                onClick={() => {
+                  handleCloseAccountMenu();
+                  navigate({ to: item?.route });
+                }}
+              >
+                {item.title}
+              </MenuItem>
+            );
+          })}
+          <Divider />
+          <MenuItem onClick={() => handleCloseAccountMenu()}>
+            Login/Signup
+          </MenuItem>
         </Menu>
       </Box>
     </NavWrapper>
