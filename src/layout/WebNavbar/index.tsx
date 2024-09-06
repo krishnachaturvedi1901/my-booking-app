@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavWrapper } from "./styles";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
@@ -14,8 +14,20 @@ import {
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Sidebar from "../Sidebar";
+import { routes } from "../../constants/route";
+import { LanguageContext } from "../../context/LanguageContext";
+
+const accountItems = [
+  { title: "Cancel Ticket", route: routes.cancellation },
+  { title: "Change Travel Date", route: routes.reschedule },
+  { title: "Show My Ticket", route: routes.displayTicket },
+  { title: "Email/SMS", route: routes.smsEmailTicket },
+];
 
 const WebNavbar: React.FC = () => {
+  const languageContext = useContext(LanguageContext);
+  if (!languageContext) return null;
+  const { language, handleLanguageChange } = languageContext;
   const navigate = useNavigate();
   const theme = useTheme();
   // Media query that matches when the screen width is below 'sm' (600px)
@@ -47,14 +59,10 @@ const WebNavbar: React.FC = () => {
 
   const changeLanguage = (language: string) => {
     console.log(`Language changed to: ${language}`);
+    handleLanguageChange(language);
     handleCloseLanguageMenu();
   };
-  const accountItems = [
-    { title: "Cancel Ticket", route: "/cancellation" },
-    { title: "Change Travel Date", route: "/reshedule" },
-    { title: "Show My Ticket", route: "/displayTicket" },
-    { title: "Email/SMS", route: "/smsEmailTicket" },
-  ];
+
   return (
     <NavWrapper>
       <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
@@ -73,6 +81,7 @@ const WebNavbar: React.FC = () => {
         {!isBelowSm && (
           <IconButton onClick={handleLanguageClick}>
             <LanguageIcon />
+            {language}
           </IconButton>
         )}
         <Menu
@@ -80,8 +89,8 @@ const WebNavbar: React.FC = () => {
           open={Boolean(languageAnchorEl)}
           onClose={handleCloseLanguageMenu}
         >
-          <MenuItem onClick={() => changeLanguage("English")}>English</MenuItem>
-          <MenuItem onClick={() => changeLanguage("Hindi")}>Hindi</MenuItem>
+          <MenuItem onClick={() => changeLanguage("en")}>English</MenuItem>
+          <MenuItem onClick={() => changeLanguage("hi")}>हिंदी</MenuItem>
         </Menu>
 
         {!isBelowSm && (

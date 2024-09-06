@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { LightOverrides } from "./override";
+import { DarkOverrides, LightOverrides } from "./override";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -7,6 +7,9 @@ import "@fontsource/roboto/700.css";
 
 // Create a theme instance.
 let theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
   navHeight: {
     maxHeight: 64,
   },
@@ -185,6 +188,55 @@ export const lightTheme = createTheme(theme, {
       disabled: "#fff",
       disabledBackground: "#BFBFBF",
       disabledOpacity: 1,
+    },
+  },
+});
+
+export const darkTheme = createTheme(theme, {
+  components: DarkOverrides,
+  palette: {
+    mode: "dark",
+    primary: {
+      light: "#b22322",
+      main: "#FF3331",
+      dark: "#ff5b5a",
+    },
+    secondary: {
+      light: "#bbbbbb",
+      main: "#AAAAAA",
+      dark: "#767676",
+      contrastText: "#ffffff",
+    },
+    info: {
+      main: "#1bb2f1",
+    },
+    success: {
+      main: "#008000",
+    },
+    error: {
+      main: "#D70000",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "rgba(143, 150, 172, 1)",
+      disabled: "#525252",
+    },
+    background: {
+      paper: "#434343",
+      default: "#1E1E1E",
+    },
+    grey: {
+      100: "#101214",
+      200: "#E0E0E0",
+      300: "#FBFBFB",
+      400: "#ffffff42",
+      600: "#ffffff",
+      900: "#1E1E1E",
+    },
+    action: {
+      disabled: "#fff",
+      disabledBackground: "#525252",
+      disabledOpacity: 0.5,
     },
   },
 });

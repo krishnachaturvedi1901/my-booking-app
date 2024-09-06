@@ -206,3 +206,174 @@ export const LightOverrides: ThemeOptions["components"] = {
     },
   },
 };
+
+export const DarkOverrides: ThemeOptions["components"] = {
+  MuiTypography: {
+    styleOverrides: {
+      root: {
+        fontFamily: "poppins, sans-serif !important",
+        fontWeight: 600,
+      },
+    },
+  },
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        textTransform: "unset",
+        whiteSpace: "nowrap",
+        fontWeight: "bold",
+      },
+      sizeLarge: {
+        height: 48,
+      },
+      text: {
+        color: "#FFFFFF",
+      },
+      contained: {
+        transition: "none",
+        background: "#ffffff",
+        color: "#1e1e1e",
+        boxShadow: "0px 6px 10px rgba(30, 30, 30, 0.3)",
+        "&:hover": {
+          color: " #ffffff",
+          background: "linear-gradient(90deg, #FF3331 0%, #CA003B 100%)",
+          boxShadow: "0px 6px 10px rgba(30, 30, 30, 0.3)",
+        },
+        "&:active": {
+          color: " #FF3331",
+          background: "#ffffff",
+          boxShadow: "unset",
+        },
+        "&.Mui-disabled": {
+          background: "rgba(82, 82, 82, 0.5)",
+          color: "#BFBFBF",
+        },
+      },
+      containedSecondary: {
+        background: "#2B75EB",
+        color: "#fff",
+        "&:hover": {
+          background: "#2B75EB",
+          color: "#fff",
+          filter: "brightness(0.9)",
+        },
+        "&:active": {
+          filter: "brightness(0.9)",
+        },
+        "&.Mui-disabled": {
+          background: "rgba(82, 82, 82, 0.5)",
+          color: "#BFBFBF",
+        },
+      },
+      outlined: {
+        transition: "none",
+        border: "1px solid #FFFFFF",
+        color: "#FFFFFF",
+        "&:hover": {
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "1px solid rgba(0, 191, 99, 1)",
+          color: "1px solid rgba(0, 191, 99, 1)",
+        },
+        "&:active": {
+          background: "rgba(255, 255, 255, 0.2)",
+          border: "1px solid #FFFFFF",
+        },
+        "&.Mui-disabled": {
+          background: "rgba(82, 82, 82, 0.5)",
+          color: "#BFBFBF",
+        },
+        "&.Mui-disabled *": {
+          color: "#BFBFBF",
+        },
+      },
+      outlinedSecondary: {
+        transition: "none",
+        border: "1px solid #FFFFFF",
+        color: "#FFFFFF",
+        "&:hover": {
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "1px solid #FFFFFF",
+          color: "#FFFFFF",
+        },
+        "&:active": {
+          background: "rgba(255, 255, 255, 0.2)",
+          border: "1px solid #FFFFFF",
+        },
+        "&.Mui-disabled": {
+          background: "rgba(82, 82, 82, 0.5)",
+          color: "#BFBFBF",
+        },
+        "&.Mui-disabled *": {
+          color: "#BFBFBF",
+        },
+      },
+    },
+  },
+  MuiInputLabel: {
+    styleOverrides: {
+      root: {
+        fontWeight: "bold",
+        fontSize: 14,
+        lineHeight: "21px",
+      },
+    },
+  },
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        borderRadius: 5,
+      },
+      input: {
+        paddingTop: 12.5,
+        paddingBottom: 12.5,
+        paddingLeft: 13,
+      },
+      adornedEnd: {
+        paddingRight: 0,
+      },
+    },
+  },
+  MuiBackdrop: {
+    styleOverrides: {
+      root: {
+        backdropFilter: `blur(3px)`,
+      },
+    },
+  },
+  MuiFilledInput: {
+    styleOverrides: {
+      root: {
+        height: "50px",
+        width: "100%",
+        borderRadius: "10px",
+        background: "#1E1E1E",
+        marginTop: "6px",
+
+        "& input": {
+          padding: "13px 18px",
+          color: "rgba(143, 150, 172, 1)",
+          textFillColor: "unset !important",
+        },
+
+        "&.Mui-focused": {
+          borderRadius: "10px",
+        },
+
+        "& .MuiSelect-filled": {
+          background: "transparent !important",
+          border: "none",
+          paddingTop: "8px",
+          opacity: 0.7,
+        },
+
+        "& .MuiSelect-icon": {
+          color: "#fff !important",
+        },
+
+        "&:before, &:after": {
+          border: "none !important",
+        },
+      },
+    },
+  },
+};

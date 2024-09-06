@@ -8,6 +8,9 @@ import createEmotionCache from "./styles/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material";
 import { lightTheme } from "./styles/theme";
+import { LanguageProvider } from "./context/LanguageContext";
+import "./i18n";
+import "./index.css";
 
 const queryClient = new QueryClient();
 const emotionCache = createEmotionCache();
@@ -30,9 +33,11 @@ declare module "@tanstack/react-router" {
 createRoot(document.getElementById("root")!).render(
   <CacheProvider value={emotionCache}>
     <ThemeProvider theme={lightTheme}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <LanguageProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </LanguageProvider>
     </ThemeProvider>
   </CacheProvider>
 );

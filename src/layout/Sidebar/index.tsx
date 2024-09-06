@@ -20,20 +20,25 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Switch from "@mui/material/Switch";
 import { useNavigate } from "@tanstack/react-router";
 import { useTheme } from "@mui/material";
+import { routes } from "../../constants/route";
 
 const serviceItems = [
-  { title: "Sign in/Sign up", route: "/login", icon: <LanguageIcon /> },
-  { title: "Search Buses", route: "/", icon: <HomeIcon /> },
-  { title: "Offers", route: "/offers", icon: <LocalOfferIcon /> },
-  { title: "Cancel Ticket", route: "/cancellation", icon: <CancelIcon /> },
-  { title: "Reschedule Ticket", route: "/reschedule", icon: <UpdateIcon /> },
+  { title: "Sign in/Sign up", route: routes.login, icon: <LanguageIcon /> },
+  { title: "Search Buses", route: routes.home, icon: <HomeIcon /> },
+  { title: "Offers", route: routes.offers, icon: <LocalOfferIcon /> },
+  { title: "Cancel Ticket", route: routes.cancellation, icon: <CancelIcon /> },
+  {
+    title: "Reschedule Ticket",
+    route: routes.reschedule,
+    icon: <UpdateIcon />,
+  },
   {
     title: "Show My Ticket",
-    route: "/displayTicket",
+    route: routes.displayTicket,
     icon: <ConfirmationNumberIcon />,
   },
-  { title: "Email/SMS", route: "/smsEmailTicket", icon: <EmailIcon /> },
-  { title: "Settings", route: "/settings", icon: <SettingsIcon /> },
+  { title: "Email/SMS", route: routes.smsEmailTicket, icon: <EmailIcon /> },
+  { title: "Settings", route: routes.settings, icon: <SettingsIcon /> },
 ];
 
 export default function Sidebar() {
@@ -44,7 +49,10 @@ export default function Sidebar() {
   });
 
   // Language switch state
-  const [language, setLanguage] = React.useState("English");
+  const languageContext = useContext(LanguageContext);
+  if (!languageContext) return null;
+  const { language, handleLanguageChange } = languageContext;
+  const [screenMode, setScreenMode] = React.useState("light");
 
   const toggleDrawer =
     (anchor: "left", open: boolean) =>
@@ -61,9 +69,13 @@ export default function Sidebar() {
     };
 
   const handleLanguageSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLanguage(event.target.checked ? "Hindi" : "English");
+    handleLanguageChange(event.target.checked ? "hi" : "en");
   };
-
+  const handleScreenModeSwitch = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setScreenMode(event.target.checked ? "dark" : "light");
+  };
   const list = (anchor: "left") => (
     <Box
       sx={{ width: 250, paddingTop: `${theme.navHeight.maxHeight + 10}px` }}
@@ -86,14 +98,22 @@ export default function Sidebar() {
       <Divider />
 
       {/* Language Switcher */}
-      <Box display="flex" justifyContent="center" alignItems="center" p={2}>
-        <LanguageIcon />
+      <Box display="flex" justifyContent="center" alignItems="center" p={1}>
         <Switch
-          checked={language === "Hindi"}
+          checked={language === "hi"}
           onChange={handleLanguageSwitch}
           inputProps={{ "aria-label": "Language Switch" }}
         />
-        <ListItemText primary={language} />
+        <ListItemText secondary={language === "hi" ? "हिंदी" : "English"} />
+      </Box>
+      {/* Darkmode switch */}
+      <Box display="flex" justifyContent="center" alignItems="center" p={1}>
+        <Switch
+          checked={screenMode === "dark"}
+          onChange={handleScreenModeSwitch}
+          inputProps={{ "aria-label": "Language Switch" }}
+        />
+        <ListItemText primary={screenMode === "dark" ? "Dark" : "Light"} />
       </Box>
     </Box>
   );
