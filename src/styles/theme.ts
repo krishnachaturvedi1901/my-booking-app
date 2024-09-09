@@ -16,6 +16,7 @@ let theme = createTheme({
   shape: {
     borderRadius: 10,
   },
+  shadows: ["none", "1px 1px 1px 2px #e67447"],
   components: {
     // Name of the component
     MuiListItemButton: {
@@ -223,7 +224,8 @@ export const darkTheme = createTheme(theme, {
     },
     background: {
       paper: "#434343",
-      default: "#1E1E1E",
+      default: "#006989",
+      dark: "#005C78",
     },
     grey: {
       100: "#101214",

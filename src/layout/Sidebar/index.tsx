@@ -21,9 +21,13 @@ import Switch from "@mui/material/Switch";
 import { useNavigate } from "@tanstack/react-router";
 import { useTheme } from "@mui/material";
 import { routes } from "../../constants/route";
+import { LanguageContext } from "../../context/LanguageContext";
+import { ScreenModeContext } from "../../context/ScreenModeContext";
+import { LockOpen } from "@mui/icons-material";
+import { Login } from "../../pages";
 
 const serviceItems = [
-  { title: "Sign in/Sign up", route: routes.login, icon: <LanguageIcon /> },
+  // { title: "Sign in/Sign up", route: routes.login, icon: <LanguageIcon /> },
   { title: "Search Buses", route: routes.home, icon: <HomeIcon /> },
   { title: "Offers", route: routes.offers, icon: <LocalOfferIcon /> },
   { title: "Cancel Ticket", route: routes.cancellation, icon: <CancelIcon /> },
@@ -49,10 +53,11 @@ export default function Sidebar() {
   });
 
   // Language switch state
-  const languageContext = useContext(LanguageContext);
-  if (!languageContext) return null;
+  const languageContext = React.useContext(LanguageContext);
+  const screenModeContext = React.useContext(ScreenModeContext);
+  if (!languageContext || !screenModeContext) return null;
   const { language, handleLanguageChange } = languageContext;
-  const [screenMode, setScreenMode] = React.useState("light");
+  const { screenMode, handleScreenModeChange } = screenModeContext;
 
   const toggleDrawer =
     (anchor: "left", open: boolean) =>
@@ -74,7 +79,7 @@ export default function Sidebar() {
   const handleScreenModeSwitch = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setScreenMode(event.target.checked ? "dark" : "light");
+    handleScreenModeChange(event.target.checked ? "dark" : "light");
   };
   const list = (anchor: "left") => (
     <Box
@@ -85,6 +90,10 @@ export default function Sidebar() {
     >
       {/* Navigation Items */}
       <List>
+        <ListItemButton>
+          <ListItemIcon>{<LockOpen />}</ListItemIcon>
+          <Login />
+        </ListItemButton>
         {serviceItems.map((item) => (
           <ListItem key={item.title} disablePadding>
             <ListItemButton onClick={() => navigate({ to: item.route })}>

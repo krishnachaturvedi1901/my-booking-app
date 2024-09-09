@@ -16,6 +16,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Sidebar from "../Sidebar";
 import { routes } from "../../constants/route";
 import { LanguageContext } from "../../context/LanguageContext";
+import { Login } from "../../pages";
 
 const accountItems = [
   { title: "Cancel Ticket", route: routes.cancellation },
@@ -25,6 +26,7 @@ const accountItems = [
 ];
 
 const WebNavbar: React.FC = () => {
+  const [openLogin, setOpenLogin] = useState(false);
   const languageContext = useContext(LanguageContext);
   if (!languageContext) return null;
   const { language, handleLanguageChange } = languageContext;
@@ -64,65 +66,67 @@ const WebNavbar: React.FC = () => {
   };
 
   return (
-    <NavWrapper>
-      <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
-        {isBelowSm && <Sidebar />}
-        <Link to="/">
-          <img
-            src="/images/bus.png"
-            height={"50px"}
-            width={"50px"}
-            alt="Logo"
-          />
-        </Link>
-        <Typography variant="h6">My-Booking-App</Typography>
-      </Box>
-      <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-        {!isBelowSm && (
-          <IconButton onClick={handleLanguageClick}>
-            <LanguageIcon />
-            {language}
-          </IconButton>
-        )}
-        <Menu
-          anchorEl={languageAnchorEl}
-          open={Boolean(languageAnchorEl)}
-          onClose={handleCloseLanguageMenu}
-        >
-          <MenuItem onClick={() => changeLanguage("en")}>English</MenuItem>
-          <MenuItem onClick={() => changeLanguage("hi")}>हिंदी</MenuItem>
-        </Menu>
+    <>
+      <NavWrapper>
+        <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
+          {isBelowSm && <Sidebar />}
+          <Link to="/">
+            <img
+              src="/images/bus.png"
+              height={"50px"}
+              width={"50px"}
+              alt="Logo"
+            />
+          </Link>
+          <Typography variant="h6">My-Booking-App</Typography>
+        </Box>
+        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+          {!isBelowSm && (
+            <IconButton onClick={handleLanguageClick}>
+              <LanguageIcon />
+              {language}
+            </IconButton>
+          )}
+          <Menu
+            anchorEl={languageAnchorEl}
+            open={Boolean(languageAnchorEl)}
+            onClose={handleCloseLanguageMenu}
+          >
+            <MenuItem onClick={() => changeLanguage("en")}>English</MenuItem>
+            <MenuItem onClick={() => changeLanguage("hi")}>हिंदी</MenuItem>
+          </Menu>
 
-        {!isBelowSm && (
-          <IconButton onClick={handleAccountClick}>
-            <AccountCircle />
-          </IconButton>
-        )}
-        <Menu
-          anchorEl={accountAnchorEl}
-          open={Boolean(accountAnchorEl)}
-          onClose={handleCloseAccountMenu}
-        >
-          {accountItems?.map((item) => {
-            return (
-              <MenuItem
-                key={item.route}
-                onClick={() => {
-                  handleCloseAccountMenu();
-                  navigate({ to: item?.route });
-                }}
-              >
-                {item.title}
-              </MenuItem>
-            );
-          })}
-          <Divider />
-          <MenuItem onClick={() => handleCloseAccountMenu()}>
-            Login/Signup
-          </MenuItem>
-        </Menu>
-      </Box>
-    </NavWrapper>
+          {!isBelowSm && (
+            <IconButton onClick={handleAccountClick}>
+              <AccountCircle />
+            </IconButton>
+          )}
+          <Menu
+            anchorEl={accountAnchorEl}
+            open={Boolean(accountAnchorEl)}
+            onClose={handleCloseAccountMenu}
+          >
+            {accountItems?.map((item) => {
+              return (
+                <MenuItem
+                  key={item.route}
+                  onClick={() => {
+                    handleCloseAccountMenu();
+                    navigate({ to: item?.route });
+                  }}
+                >
+                  {item.title}
+                </MenuItem>
+              );
+            })}
+            <Divider />
+            <MenuItem>
+              <Login />
+            </MenuItem>
+          </Menu>
+        </Box>
+      </NavWrapper>
+    </>
   );
 };
 
